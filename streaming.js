@@ -71,5 +71,5 @@ io.sockets.on('connection', function (socket) {
       socket.emit('news', bodyChunk);
       last = bodyChunk;
     }
-  }, 0.001);
+  }, 0.1);
 });
