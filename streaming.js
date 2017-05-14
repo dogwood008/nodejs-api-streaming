@@ -4,7 +4,6 @@ var fs = require('fs');
 var last;
 var tick;
 
-
 /*
 Environment           <Domain>
 fxTrade               stream-fxtrade.oanda.com
@@ -13,9 +12,14 @@ sandbox               stream-sandbox.oanda.com
 */
 
 // Replace the following variables with your personal ones
-var domain = 'stream-fxpractice.oanda.com'
-var access_token = 'ACCESS-TOKEN'
-var account_id = '12345'
+var domain = process.env.OANDA_DOMAIN || 'stream-fxpractice.oanda.com';
+var access_token = process.env.OANDA_ACCESS_TOKEN;
+var account_id = process.env.OANDA_ACCOUNT_ID;
+var listen_port = parseInt(process.env.OANDA_STREAMING_PORT) || 1337;
+var bind_host = process.env.OANDA_BIND_HOST || '127.0.0.1';
+if(access_token === undefined || account_id === undefined) {
+  throw 'access_token or account_id is not given.';
+}
 // Up to 10 instruments, separated by URL-encoded comma (%2C)
 var instruments = "EUR_USD%2CUSD_CAD"
 
@@ -47,7 +51,7 @@ var request = https.request(options, function(response){
 
 request.end();
 
-app.listen(1337, '127.0.0.1');
+app.listen(listen_port, bind_host);
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
