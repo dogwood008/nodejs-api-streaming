@@ -21,7 +21,7 @@ if(access_token === undefined || account_id === undefined) {
   throw 'access_token or account_id is not given.';
 }
 // Up to 10 instruments, separated by URL-encoded comma (%2C)
-var instruments = "EUR_USD%2CUSD_CAD"
+var instruments = 'USD_JPY%2cEUR_JPY%2cGBP_JPY%2cAUD_JPY%2cNZD_JPY%2cZAR_JPY%2cEUR_USD%2cGBP_USD%2cAUD_USD%2cEUR_AUD'
 
 var https;
 
